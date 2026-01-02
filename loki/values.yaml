@@ -1,0 +1,31 @@
+# Loki Stack for Centralized Logging
+# PLG Stack: Prometheus - Loki - Grafana
+
+loki-stack:
+  # Disable redundant Grafana (we already have it from monitoring stack)
+  grafana:
+    enabled: false
+
+  # Disable redundant Prometheus
+  prometheus:
+    enabled: false
+
+  # Enable Promtail: Agent to collect logs from all pods
+  promtail:
+    enabled: true
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+
+  # Loki configuration
+  loki:
+    persistence:
+      enabled: false  # No persistent storage for lab
+    
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        memory: 256Mi

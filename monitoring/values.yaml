@@ -1,0 +1,47 @@
+# Monitoring Stack (Prometheus + Grafana + Alertmanager)
+# Optimized for cost and resource efficiency
+
+kube-prometheus-stack:
+  # Disable Persistent Volume (Data lost when Pod dies - OK for Lab)
+  prometheus:
+    prometheusSpec:
+      storageSpec: {}
+      replicas: 1
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: 250m
+
+  # Single replica for Alertmanager
+  alertmanager:
+    alertmanagerSpec:
+      replicas: 1
+
+  # Grafana configuration
+  grafana:
+    enabled: true
+    persistence:
+      enabled: false
+    adminPassword: admin123
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 100m
+    
+    # Grafana environment variables for subpath support
+    env:
+      GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/"
+      GF_SERVER_SERVE_FROM_SUB_PATH: "false"
+
+  # Resource optimization
+  kubeStateMetrics:
+    enabled: true
+
+  nodeExporter:
+    enabled: true
+
+  prometheusOperator:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi

@@ -1,0 +1,12 @@
+# Metrics Server for HPA (Horizontal Pod Autoscaler)
+
+metrics-server:
+  # Required for some environments
+  args:
+    - --kubelet-insecure-tls
+  
+  # Optimize resources
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi

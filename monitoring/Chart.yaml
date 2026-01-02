@@ -1,0 +1,11 @@
+apiVersion: v2
+name: monitoring
+description: Kube-Prometheus-Stack for monitoring and observability
+type: application
+version: 1.0.0
+appVersion: "0.71.0"
+
+dependencies:
+  - name: kube-prometheus-stack
+    version: 61.0.0
+    repository: https://prometheus-community.github.io/helm-charts

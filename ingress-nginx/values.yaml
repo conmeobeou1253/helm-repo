@@ -1,0 +1,24 @@
+# Nginx Ingress Controller
+# Single LoadBalancer for all services
+
+ingress-nginx:
+  controller:
+    # Use LoadBalancer (AWS will create ELB)
+    service:
+      type: LoadBalancer
+    
+    # Disable admission webhooks to save resources
+    admissionWebhooks:
+      enabled: false
+    
+    # Optimize resources for t3.medium nodes
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    
+    # Enable metrics for Prometheus
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true

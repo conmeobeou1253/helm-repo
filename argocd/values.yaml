@@ -1,0 +1,25 @@
+# ArgoCD Helm Chart Values
+# Wraps official argo-cd chart with optimized settings
+
+argo-cd:
+  # Optimize costs: Use ClusterIP instead of LoadBalancer
+  server:
+    service:
+      type: ClusterIP
+    replicas: 1
+
+  # Disable HA (High Availability) to save resources
+  redis-ha:
+    enabled: false
+
+  controller:
+    replicas: 1
+
+  repoServer:
+    replicas: 1
+
+  dex:
+    enabled: true
+
+  applicationSet:
+    enabled: true
